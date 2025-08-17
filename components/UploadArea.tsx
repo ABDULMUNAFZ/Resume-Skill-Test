@@ -21,7 +21,7 @@ export default function UploadArea({ onText }: Props) {
       if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
         text = await extractTextFromPDF(file);
       } else if (file.type.startsWith("image/") || /\.(png|jpg|jpeg)$/i.test(file.name)) {
-        const result = await Tesseract.recognize(await file.arrayBuffer(), "eng");
+        const result = await Tesseract.recognize(file, "eng");
         text = result.data.text;
       } else if (/\.(txt)$/i.test(file.name)) {
         text = await file.text();
